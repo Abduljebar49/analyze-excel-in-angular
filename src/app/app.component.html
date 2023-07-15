@@ -2,18 +2,21 @@
   <p class="" style="margin-left:20px; margin-top:20px;">
     Upload file here
   </p>
-  <input type="file" name="Excel file" id="" [multiple]="false" (change)="onStockStatusFileChange($event)"
+  <input type="file" name="Excel file" id="" [multiple]="false" (change)="onFileChange($event)"
     accept=".csv,.xlsx,application/vnd.ms-excel" style="margin-left: 20px;" />
 </div>
 <div class="row text-center justify-content-ceter mt-2 mr-5 ml-5">
   <div *ngIf="isFileUploading"><mat-spinner></mat-spinner></div>
 </div>
 <div class="row text-center justify-content-center m-1" *ngIf="excelData.length">
+  <div class="btn btn-primary m-2" (click)="generateJSON()" style="width: 200px">Generate json</div>
+  <div class="btn btn-success m-2" (click)="convertData()" style="width: 200px">convert data</div>
+  <div *ngIf="convertedData.length > 0" class="btn btn-success m-2" (click)="exportToExacel()" style="width: 200px">download in excel</div>
 </div>
 <div class="row justify-content-center">
   <div class="row justify-content-center text-center" style="margin-top: 50px; width: 95%;">
     <table class="table table-stripped table-responsive" style="width: 96%;" *ngIf="excelData.length > 0">
-      <thead class="table-dark">
+      <thead>
         <th *ngFor="let title of excelHeader">{{ title }}</th>
       </thead>
       <tbody>
